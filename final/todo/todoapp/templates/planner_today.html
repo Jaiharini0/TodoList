@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    {%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{% static 'today.css'%}" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container-fluid" >
+        <nav class="navbar navbar-light " id="home">
+            <div class="container-fluid"  >
+              <a class="navbar-brand" href="#">ToDos<img src="{%static '/images/register.png'%}" width="50px" height="50px"></a>
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-info" type="submit">Search</button>
+              </form>
+              <ul class="nav justify-content-end">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Planner
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      
+                      <li><a class="dropdown-item" href="planner_today">Today</a></li>
+                      
+                      <li><a class="dropdown-item" href="planner_tomorrow">Tomorrow</a></li>
+                    </ul>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="list">List</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index">Logout</a>
+                </li>
+                
+                
+              </ul>
+            </div>
+        </nav>
+    </div>
+        <hr>
+        <br> 
+       <div id="cat">
+          <h2 style="text-align: center;">Categories</h2>
+          <br>
+          <div class="container" style="text-align:center;">
+            <a href="#" id="box">work</a>
+            <a href="#" id="box">Gym</a>
+            <a href="#" id="box">Travel</a>
+            <a href="#" id="box">Shopping</a>
+          </div>
+       </div>
+           <br>  
+           <br> 
+        <div class="card" id=card style="align-items: center;border:none" >
+          <h2>Hey{{user.username}},Whats Plan Today!</h2>
+          <br>
+          <h3>Any Task to be Added Click here-></h3>
+          <button type="submit" class="btn btn-warning mb-3" onclick="Form()">Add</button>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card" id="Cards" style="align-items:center;width:25rem">
+                  <h3>Today Tasks</h3>
+                  tasks to be ....
+                    <ul style="list-style: box;">
+                        {% for t in task%}
+                        <li>
+                            <div class="card">
+                               <p>{{t.Taskname}}</p> 
+                                <p>{{t.Description}}</p>
+                                <p>{{t.created}}</p>
+                               <input type="checkbox">{{t.Completed}}
+                            </div>
+                        </li>
+                        {% endfor%}
+                    </ul>
+                  
+              </div>
+            </div>
+            <!-- <div class="col-lg-6">
+              <div class="card" id="Cards">
+                <img id="img"src="{%static '/images/today.jpg'%}" >
+              </div>
+            </div> -->
+          </div>
+        </div>  
+          
+          
+          <div class="row" >
+            <div class="col-lg-6">
+              <br>
+              <form action="planner_today" method="post" id="Myform" >
+                {% csrf_token %}
+                taskname:
+                <input type="text" name="Taskname" placeholder="title"><br><br>
+                Description:
+                <textarea rows="10" cols="30" name="Description" placeholder="description"></textarea><br><br>
+                Check if completed:
+                <input type="checkbox">Completed<br>
+
+                <button type="submit" class="btn btn-warning mb-3" onclick="closeForm()">Submit</button>           
+              </form>
+            </div>
+            <div class="col-lg-6">
+              <img id="img"src="{%static '/images/today.jpg'%}" >
+            </div>
+            
+          </div>
+       
+          <script>
+            function Form(){
+              document.getElementById("Myform").style.display="block";
+              document.getElementById("img").style.display="block",
+              document.getElementById("cat").style.display="block",
+              document.getElementById("Cards").style.display="none";
+              document.getElementById("card").style.display="none";
+            }
+          </script>
+                        
+               
+    </div>
+</body>
+</html>

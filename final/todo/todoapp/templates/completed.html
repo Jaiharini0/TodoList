@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="row" >
+        <div class="col-lg-6">
+          <br>
+          <form action="planner_today" method="post" id="Myform" >
+            {% csrf_token %}
+            taskname:
+            <input type="text" name="Taskname" value="{{items.Taskname}}" placeholder="title"><br><br>
+            Description:
+            <textarea rows="10" cols="30" name="Description" value="{{items.Description}}" placeholder="description"></textarea><br><br>
+            Check if completed:
+            <input type="checkbox" value="{{items.completed}}">Completed<br>
+
+            <button type="submit" class="btn btn-warning mb-3" >Submit</button>           
+          </form>
+        </div>
+        <div class="col-lg-6">
+          <img id="img"src="{%static '/images/today.jpg'%}" >
+        </div>
+        
+      </div>
+</body>
+</html>
